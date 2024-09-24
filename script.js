@@ -73,30 +73,4 @@ submitButton.addEventListener('click', startGame);
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));
 
 
-describe('Tic Tac Toe Initial Page', () => {
-  it('Should find the input tag for Player 1 and Player 2', () => {
-    // Check if input fields for players exist before starting the game
-    const player1Input = document.getElementById('player1');
-    const player2Input = document.getElementById('player2');
-    expect(player1Input).to.exist;
-    expect(player2Input).to.exist;
-  });
-
-  it('Should display the Tic Tac Toe board after starting the game', () => {
-    // Simulate starting the game by entering player names and clicking the submit button
-    document.getElementById('player1').value = 'Player 1';
-    document.getElementById('player2').value = 'Player 2';
-    document.getElementById('submit').click();
-
-    // Check if the board is displayed
-    const board = document.querySelector('.board');
-    expect(board).to.be.visible;
-
-    // Check that all cells are empty initially
-    const cells = document.querySelectorAll('.cell');
-    cells.forEach(cell => {
-      expect(cell.textContent).to.equal(''); // Ensure no 'x' or 'o' is present yet
-    });
-  });
-});
 
