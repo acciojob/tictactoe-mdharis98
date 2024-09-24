@@ -1,6 +1,5 @@
-// Getting elements
-const player1Input = document.getElementById('player-1');
-const player2Input = document.getElementById('player-2');
+const player1Input = document.getElementById('player1');
+const player2Input = document.getElementById('player2');
 const submitButton = document.getElementById('submit');
 const board = document.querySelector('.board');
 const messageDiv = document.querySelector('.message');
@@ -13,7 +12,6 @@ let currentPlayer = '';
 let boardState = ['', '', '', '', '', '', '', '', ''];
 let isGameOver = false;
 
-// Function to start the game
 function startGame() {
   player1 = player1Input.value;
   player2 = player2Input.value;
@@ -27,7 +25,6 @@ function startGame() {
   }
 }
 
-// Function to handle cell clicks
 function handleCellClick(event) {
   const cell = event.target;
   const cellIndex = parseInt(cell.id) - 1;
@@ -40,7 +37,6 @@ function handleCellClick(event) {
   }
 }
 
-// Function to switch turns
 function switchPlayer() {
   if (!isGameOver) {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
@@ -48,7 +44,6 @@ function switchPlayer() {
   }
 }
 
-// Function to check if there's a winner
 function checkWinner() {
   const winningCombinations = [
     [0, 1, 2],
@@ -75,6 +70,5 @@ function checkWinner() {
   }
 }
 
-// Event listeners
 submitButton.addEventListener('click', startGame);
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));
