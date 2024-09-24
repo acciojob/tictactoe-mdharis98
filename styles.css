@@ -1,4 +1,4 @@
-/*  your css code here. If applicable */
+
 * {
     margin: 0;
     padding: 0;
@@ -37,7 +37,7 @@ body {
     width: 200px;
 }
 
-button {
+#submit {
     padding: 10px 20px;
     border: none;
     background-color: #28a745;
@@ -45,9 +45,10 @@ button {
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
+	text-align:center;
 }
 
-button:hover {
+#submit:hover {
     background-color: #218838;
 }
 
