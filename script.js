@@ -14,7 +14,7 @@ document.getElementById('submit').addEventListener('click', function() {
     if (player1 && player2) {
         document.getElementById('player-info').style.display = 'none';
         document.getElementById('game').style.display = 'block';
-        updateMessage(); // Initialize the message with player 1's turn
+        updateMessage();
     } else {
         alert('Please enter names for both players.');
     }
@@ -24,13 +24,8 @@ document.getElementById('submit').addEventListener('click', function() {
 cells.forEach(cell => {
     cell.addEventListener('click', function() {
         if (gameActive && cell.textContent === '') {
-            // Set the cell content to X or O based on the current player
             cell.textContent = currentPlayer;
-
-            // Check if there's a winner after the move
             checkWinner();
-
-            // Switch to the next player
             switchPlayer();
         }
     });
@@ -38,13 +33,13 @@ cells.forEach(cell => {
 
 // Function to switch player after a move
 function switchPlayer() {
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // Switch between X and O
-    updateMessage(); // Update the message with the next player's turn
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    updateMessage();
 }
 
 // Function to update the turn message
 function updateMessage() {
-    const player = currentPlayer === 'X' ? player1 : player2; // Show the current player's name
+    const player = currentPlayer === 'X' ? player1 : player2;
     message.textContent = `${player}, you're up!`;
 }
 
@@ -56,22 +51,20 @@ function checkWinner() {
         [1, 5, 9], [3, 5, 7]             // Diagonals
     ];
 
-    // Check each win pattern
     winPatterns.forEach(pattern => {
         const [a, b, c] = pattern;
         if (
-            document.getElementById(a).textContent !== '' && 
+            document.getElementById(a).textContent !== '' &&
             document.getElementById(a).textContent === document.getElementById(b).textContent &&
             document.getElementById(b).textContent === document.getElementById(c).textContent
         ) {
-            // If we have a winner, stop the game and show a winning message
             const winner = currentPlayer === 'X' ? player1 : player2;
             message.textContent = `${winner}, congratulations! You won!`;
             gameActive = false;
         }
     });
 
-    // Check for a draw if no one has won yet
+    // Check for a draw
     if (gameActive && [...cells].every(cell => cell.textContent !== '')) {
         message.textContent = 'It\'s a draw!';
         gameActive = false;
