@@ -60,7 +60,7 @@ function checkWinner() {
             document.getElementById(b).textContent === document.getElementById(c).textContent
         ) {
             const winner = currentPlayer === 'X' ? player1 : player2;
-            message.textContent = `${winner}, congratulations you won!`; // Show winning message
+            message.textContent = `${winner} congratulations you won!`; // Show winning message
             gameActive = false; // End the game
         }
     });
