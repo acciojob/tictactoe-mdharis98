@@ -3,6 +3,7 @@ let player1 = '';
 let player2 = '';
 let gameActive = true;
 
+// Get all cells and message element
 const cells = document.querySelectorAll('.cell');
 const message = document.querySelector('.message');
 
@@ -14,7 +15,7 @@ document.getElementById('submit').addEventListener('click', function() {
     if (player1 && player2) {
         document.getElementById('player-info').style.display = 'none';
         document.getElementById('game').style.display = 'block';
-        updateMessage();
+        updateMessage(); // Update the message to show the first turn
     } else {
         alert('Please enter names for both players.');
     }
@@ -24,9 +25,9 @@ document.getElementById('submit').addEventListener('click', function() {
 cells.forEach(cell => {
     cell.addEventListener('click', function() {
         if (gameActive && cell.textContent === '') {
-            cell.textContent = currentPlayer;
-            checkWinner();
-            switchPlayer();
+            cell.textContent = currentPlayer; // Mark the cell with 'X' or 'O'
+            checkWinner(); // Check if someone won
+            if (gameActive) switchPlayer(); // Switch player if the game is still active
         }
     });
 });
@@ -34,13 +35,13 @@ cells.forEach(cell => {
 // Function to switch player after a move
 function switchPlayer() {
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    updateMessage();
+    updateMessage(); // Update whose turn it is
 }
 
 // Function to update the turn message
 function updateMessage() {
     const player = currentPlayer === 'X' ? player1 : player2;
-    message.textContent = `${player}, you're up!`;
+    message.textContent = `${player}, you're up!`; // Show current player's turn
 }
 
 // Function to check for a winner
@@ -59,14 +60,14 @@ function checkWinner() {
             document.getElementById(b).textContent === document.getElementById(c).textContent
         ) {
             const winner = currentPlayer === 'X' ? player1 : player2;
-            message.textContent = `${winner}, congratulations! You won!`;
-            gameActive = false;
+            message.textContent = `${winner}, congratulations you won!`; // Show winning message
+            gameActive = false; // End the game
         }
     });
 
     // Check for a draw
     if (gameActive && [...cells].every(cell => cell.textContent !== '')) {
         message.textContent = 'It\'s a draw!';
-        gameActive = false;
+        gameActive = false; // End the game for draw
     }
 }
