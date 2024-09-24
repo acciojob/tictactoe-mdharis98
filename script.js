@@ -25,9 +25,14 @@ document.getElementById('submit').addEventListener('click', function() {
 cells.forEach(cell => {
     cell.addEventListener('click', function() {
         if (gameActive && cell.textContent === '') {
+            // Set the content to current player's symbol
             cell.textContent = currentPlayer; // Mark the cell with 'X' or 'O'
-            checkWinner(); // Check if someone won
-            if (gameActive) switchPlayer(); // Switch player if the game is still active
+            
+            // Check for a winner after the click
+            checkWinner(); 
+            
+            // If the game is still active, switch the player
+            if (gameActive) switchPlayer(); 
         }
     });
 });
