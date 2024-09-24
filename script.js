@@ -9,8 +9,8 @@ const message = document.querySelector('.message');
 
 // Function to start the game and show the board
 document.getElementById('submit').addEventListener('click', function() {
-    player1 = document.getElementById('player-1').value;
-    player2 = document.getElementById('player-2').value;
+    player1 = document.getElementById('player1').value;
+    player2 = document.getElementById('player2').value;
 
     if (player1 && player2) {
         document.getElementById('player-info').style.display = 'none';

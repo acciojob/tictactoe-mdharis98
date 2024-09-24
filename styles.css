@@ -22,14 +22,14 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#player-1 {
+#player1 {
     margin: 10px;
     padding: 10px;
     border: 2px solid #ddd;
     border-radius: 5px;
     width: 200px;
 }
-#player-2 {
+#player2 {
     margin: 10px;
     padding: 10px;
     border: 2px solid #ddd;
