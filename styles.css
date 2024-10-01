@@ -1,50 +1,62 @@
- body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    .container {
-      margin-top: 50px;
-    }
-    h1 {
-      font-size: 36px;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-    }
-    .input-section {
-      margin-bottom: 20px;
-    }
-    input {
-      padding: 10px;
-      font-size: 16px;
-      margin: 5px;
-    }
-    #submit {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .board {
-      display: none;
-      margin-top: 30px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-gap: 5px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .cell {
-      width: 100px;
-      height: 100px;
-      background-color: pink;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      cursor: pointer;
-      border: 1px solid black;
-    }
-    .message {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+#player-form input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+#player-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.message {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    cursor: pointer;
+}
