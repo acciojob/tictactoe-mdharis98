@@ -1,76 +1,69 @@
-const player1Input = document.getElementById('player-1');
-const player2Input = document.getElementById('player-2');
-const submitButton = document.getElementById('submit');
-const board = document.querySelector('.board');
-const messageDiv = document.querySelector('.message');
-const cells = document.querySelectorAll('.cell');
+ let player1 = "";
+      let player2 = "";
+      let currentPlayer = "";
+      let gameBoard = Array(9).fill(null);
+      let isGameOver = false;
 
-// Variables to track the game
-let player1 = '';
-let player2 = '';
-let currentPlayer = '';
-let boardState = ['', '', '', '', '', '', '', '', ''];
-let isGameOver = false;
+      // Start game button click event
+      document.getElementById("submit").addEventListener("click", function () {
+        player1 = document.getElementById("player-1").value;
+        player2 = document.getElementById("player-2").value;
+        if (player1 && player2) {
+          document.querySelector(".form").classList.add("hidden");
+          document.getElementById("game-board").classList.remove("hidden");
+          currentPlayer = player1;
+          document.getElementById(
+            "turn-message"
+          ).textContent = `${currentPlayer}, you're up`;
+        }
+      });
 
-function startGame() {
-  player1 = player1Input.value;
-  player2 = player2Input.value;
-  
-  if (player1 && player2) {
-    currentPlayer = player1;
-    messageDiv.textContent = `${currentPlayer}, you're up`;
-    board.style.display = 'block';
-  } else {
-    alert('Please enter names for both players');
-  }
-}
+      // Cell click event
+      document.querySelectorAll(".cell").forEach((cell) => {
+        cell.addEventListener("click", function () {
+          if (isGameOver) return;
 
-function handleCellClick(event) {
-  const cell = event.target;
-  const cellIndex = parseInt(cell.id) - 1;
-  
-  if (boardState[cellIndex] === '' && !isGameOver) {
-    boardState[cellIndex] = currentPlayer === player1 ? 'X' : 'O';
-    cell.textContent = boardState[cellIndex];
-    checkWinner();
-    switchPlayer();
-  }
-}
+          const cellIndex = this.id - 1;
+          if (!gameBoard[cellIndex]) {
+            gameBoard[cellIndex] = currentPlayer === player1 ? "X" : "O";
+            this.textContent = gameBoard[cellIndex];
+            this.classList.add("taken");
 
-function switchPlayer() {
-  if (!isGameOver) {
-    currentPlayer = currentPlayer === player1 ? player2 : player1;
-    messageDiv.textContent = `${currentPlayer}, you're up`;
-  }
-}
+            if (checkWinner()) {
+              document.getElementById(
+                "turn-message"
+              ).textContent = `${currentPlayer}, congratulations you won!`;
+              isGameOver = true;
+            } else if (gameBoard.every((cell) => cell !== null)) {
+              document.getElementById("turn-message").textContent =
+                "It's a draw!";
+              isGameOver = true;
+            } else {
+              currentPlayer = currentPlayer === player1 ? player2 : player1;
+              document.getElementById(
+                "turn-message"
+              ).textContent = `${currentPlayer}, you're up`;
+            }
+          }
+        });
+      });
 
-function checkWinner() {
-  const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
+      // Check for a winner
+      function checkWinner() {
+        const winningCombinations = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
 
-  winningCombinations.forEach(combination => {
-    const [a, b, c] = combination;
-    if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
-      isGameOver = true;
-      messageDiv.textContent = `${currentPlayer} congratulations you won!`;
-    }
-  });
-
-  if (!boardState.includes('') && !isGameOver) {
-    messageDiv.textContent = `It's a tie!`;
-    isGameOver = true;
-  }
-}
-submitButton.addEventListener('click', startGame);
-cells.forEach(cell => cell.addEventListener('click', handleCellClick));
-
-
-
+        return winningCombinations.some((combination) => {
+          return combination.every((index) => {
+            return gameBoard[index] === (currentPlayer === player1 ? "X" : "O");
+          });
+        });
+      }
